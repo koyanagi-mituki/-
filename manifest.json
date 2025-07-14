@@ -1,0 +1,21 @@
+{
+    "name": "ウォーターソートパズル PWA",
+    "short_name": "水並べ",
+    "description": "シンプルなウォーターソートパズルゲーム",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#f0f0f0",
+    "theme_color": "#317EFB",
+    "icons": [
+        {
+            "src": "/icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

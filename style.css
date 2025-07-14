@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#game-board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+    justify-content: center;
+}
+
+.tube {
+    width: 60px;
+    height: 180px;
+    border: 3px solid #333;
+    border-radius: 0 0 30px 30px;
+    background-color: #fff;
+    
+    display: flex;
+    flex-direction: column-reverse; /* 水が下から上に積み重なるように */
+    justify-content: flex-start;    /* 水を一番下に揃える */
+    align-items: stretch;           /* 水の幅を試験管に合わせる */
+    overflow: hidden; /* はみ出した水を隠すために重要 */
+
+    position: relative; /* アニメーション用要素の基準点として必要 */
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    /* ★重要: transformとbox-shadowの両方にトランジションを設定 */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
+}
+
+/* 選択された試験管のスタイル */
+.tube.selected {
+    border-color: #007bff; /* 青いボーダー */
+    transform: translateY(-10px); /* ★持ち上がるモーション */
+    
+    /* 光るシャドウとアニメーション */
+    box-shadow: 
+        0 0 0 3px #007bff, /* 青いボーダーの強調 */
+        0 0 15px 5px rgba(0, 123, 255, 0.7); /* 外側に光るシャドウ */
+    animation: pulseBorder 1.5s infinite alternate; /* 光るアニメーションを適用 */
+}
+
+/* ★追加: 光るアニメーションのキーフレーム */
+@keyframes pulseBorder {
+    0% {
+        box-shadow: 
+            0 0 0 3px #007bff, 
+            0 0 10px 3px rgba(0, 123, 255, 0.5); /* 弱く光る */
+    }
+    100% {
+        box-shadow: 
+            0 0 0 3px #007bff, 
+            0 0 20px 8px rgba(0, 123, 255, 0.9); /* 強く光る */
+    }
+}
+
+.water {
+    width: 100%;
+    background-color: currentColor;
+    transition: height 0.3s ease-out; /* 水量の変化にアニメーション */
+}
+
+/* --- 水を注ぐアニメーション関連のCSS --- */
+
+/* 注ぎ元の試験管アニメーション */
+.tube.pour-origin {
+    /* JavaScriptでtransformを設定するため、ここではtranslateYのみ */
+    transform: translateY(-10px); /* 持ち上げる動き */
+    transition: transform 0.3s ease-out; /* 傾きアニメーションを滑らかに */
+}
+
+/* 注ぎ先の試験管アニメーション (ここでは視覚的な効果は薄い) */
+.tube.pour-target {
+    /* 受け入れ準備用クラス */
+}
+
+/* 空中を移動する水のアニメーション要素 */
+.pouring-water-anim {
+    position: absolute; /* 試験管のフローから独立させる */
+    transform-origin: bottom center; /* 回転の中心を底の中心に */
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    z-index: 10; /* 他の要素より手前に表示 */
+    /* 背景色はJSで .color-XXX クラスが適用される */
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 水の色をCSS変数で定義 (JavaScriptから設定される) */
+.color-red { color: #FF0000; }
+.color-blue { color: #0000FF; }
+.color-green { color: #008000; }
+.color-yellow { color: #FFFF00; }
+.color-purple { color: #800080; }
+.color-orange { color: #FFA500; }
+.color-cyan { color: #00FFFF; }
+.color-magenta { color: #FF00FF; }
+.color-lime { color: #00FF00; }
+.color-brown { color: #A52A2A; }
