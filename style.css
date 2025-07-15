@@ -80,24 +80,7 @@ h1 {
     transition: height 0.4s ease-out; /* 水が減ったり増えたりする速さ */
 }
 
-/* --- 水を注ぐアニメーション関連のCSS --- */
 
-/* 注ぎ元の試験管アニメーション */
-.tube.pour-origin {
-    /* transformはJavaScriptで動的に設定される */
-    transition: transform 0.3s cubic-bezier(0.42, 0, 0.58, 1); /* 速く傾き、ゆっくり戻るようなイージング */
-}
-
-/* 空中を移動する水のアニメーション要素 */
-.pouring-water-anim {
-    position: absolute; /* 試験管のフローから独立して自由に移動 */
-    transform-origin: bottom center; /* 回転の中心を水の底の中央に設定 */
-    /* transform (移動と回転) と opacity (透明度) の変化を滑らかにする */
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.6s ease-in; /* 水の落下を意識したイージング */
-    z-index: 10; /* 他の要素より手前に表示 */
-    pointer-events: none; /* クリックイベントが透過するように */
-    border-radius: 0 0 30px 30px; /* 試験管の下部に合わせて少し丸みを帯びさせる */
-}
 
 /* ボタンのスタイル */
 button {
